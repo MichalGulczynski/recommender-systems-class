@@ -89,9 +89,7 @@ def evaluate_train_test_split_implicit(recommender, interactions_df, items_df, s
     ndcg_10 = []
 
     # Train the recommender
-
     recommender.fit(interactions_df_train, None, items_df)
-
     # Make recommendations for each user in the test set and calculate the metric
     # against all items of that user in the test set
 
@@ -101,16 +99,25 @@ def evaluate_train_test_split_implicit(recommender, interactions_df, items_df, s
 
         recommendations = recommender.recommend(pd.DataFrame([user_id], columns=['user_id']),
                                                 items_df, n_recommendations=10)
-
+        print(user_id)
+        print("loop1")
         hr_1.append(hr(recommendations, user_interactions, n=1))
+        print("loop2")
         hr_3.append(hr(recommendations, user_interactions, n=3))
+        print("loop3")
         hr_5.append(hr(recommendations, user_interactions, n=5))
+        print("loop4")
         hr_10.append(hr(recommendations, user_interactions, n=10))
+        print("loop5")
         ndcg_1.append(ndcg(recommendations, user_interactions, n=1))
+        print("loop6")
         ndcg_3.append(ndcg(recommendations, user_interactions, n=3))
+        print("loop7")
         ndcg_5.append(ndcg(recommendations, user_interactions, n=5))
+        print("loop8")
         ndcg_10.append(ndcg(recommendations, user_interactions, n=10))
-
+    
+    print("hr")
     hr_1 = np.mean(hr_1)
     hr_3 = np.mean(hr_3)
     hr_5 = np.mean(hr_5)
